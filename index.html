@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<style>
+  body {
+   
+    background-color: cornsilk;
+  }
+  .container{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 50vh;
+    width: 100%;
+  }
+  .player {
+    width: 500px;
+    height: 100px;
+    margin: 0px;
+    display: inline-block;
+  }
+  #player1{
+    background-color: red;
+  }
+  #player2{
+    background-color: blue;
+  }
+  h1{
+    margin-top:5%;
+    text-align: center;
+  }
+  #winner {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: blue; /* Fallback color */
+  background-color: rgba(4, 37, 185, 0.8); /* Black w/ opacity */
+  font-size: 200px;
+  color:white;
+  justify-content: center;
+}
+
+</style>
+</head>
+<body>
+
+    <h1>Fight!!</h1>
+    <div class="container">
+ <div class="player" id="player1"></div>
+  <div class="player" id="player2"></div>
+   
+</div>
+ <dialog id="winner">Blue Wins!!!!!</dialog>
+ 
+  <script>
+    const player1 = document.getElementById('player1');
+    const player2 = document.getElementById('player2');
+
+    player1.addEventListener('click', () => {
+      resizeBlock(player1, player2);
+    });
+
+    player2.addEventListener('click', () => {
+      resizeBlock(player2, player1);
+    });
+
+    function resizeBlock(growingBlock, shrinkingBlock) {
+      const growingSize = parseInt(window.getComputedStyle(growingBlock).width);
+      const shrinkingSize = parseInt(window.getComputedStyle(shrinkingBlock).width);
+
+      growingBlock.style.width = growingSize + 10 + 'px';
+
+      shrinkingBlock.style.width = shrinkingSize - 10 + 'px';
+
+      checkWinner();
+    }
+
+    function checkWinner() {
+      const player1Size = parseInt(window.getComputedStyle(player1).width);
+      const player2Size = parseInt(window.getComputedStyle(player2).width);
+
+      if (player1Size <= 0) {
+        showDialog();
+      }
+       else if (player2Size <= 0) {
+        showDialog1();
+      }
+    }
+
+    const dialog = document.getElementById("winner"); 
+
+        function showDialog1() { 
+            dialog.innerHTML="RED wins!!!!!";
+            dialog.style.backgroundColor="Red";
+            dialog.show(); 
+        } 
+        function showDialog(){
+          dialog.show(); 
+
+        }
+    
+  </script>
+</body>
+</html>
